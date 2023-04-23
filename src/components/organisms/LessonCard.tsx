@@ -14,7 +14,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import ArticleIcon from '@mui/icons-material/Article';
 import Box from '@mui/material/Box';
-import { previewPlaceholder } from '../../constants';
+import { PREVIEW_PLACEHOLDER } from '../../constants';
 
 type Props = {
   lesson: ILesson;
@@ -27,7 +27,7 @@ export const LessonCard: FC<Props> = ({ lesson }) => {
     <CardItem>
       <CardMedia
         component="img"
-        image={type === 'video' ? `${previewImageLink}/lesson-${order}.webp` : previewPlaceholder}
+        image={type === 'video' ? `${previewImageLink}/lesson-${order}.webp` : PREVIEW_PLACEHOLDER}
         alt={title}
         sx={{ width: { xs: '100%', lg: '50%' } }}
       />

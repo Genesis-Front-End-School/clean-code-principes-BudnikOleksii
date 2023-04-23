@@ -1,11 +1,12 @@
 import { FC, useEffect, useRef, useState } from 'react';
 import Hls from 'hls.js';
 import Box from '@mui/material/Box';
-import { errorPlaceholder } from '../../constants';
+import { CHANGE_RATE_HOTKEYS, ERROR_PLACEHOLDER, VIDEO_RATE } from '../../constants';
 import { ILesson } from '../../types/course';
 import { useAppDispatch } from '../../app/hooks';
 import { updateCurrentTime } from '../../features/courses/courses-slice';
 import Typography from '@mui/material/Typography';
+import { hlsErrorHandler, initHls } from '../../utils/hls-helpers';
 
 type Props = {
   lesson: ILesson;
@@ -17,58 +18,40 @@ export const VideoBlock: FC<Props> = ({ lesson }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isError, setIsError] = useState(false);
 
+  const handleChangeSpeed = (event: KeyboardEvent) => {
+    const video = videoRef.current;
+
+    if (!event.altKey || !video) {
+      return;
+    }
+
+    const rate = video.playbackRate;
+
+    switch (event.key) {
+      case CHANGE_RATE_HOTKEYS.increase:
+        video.playbackRate = rate >= VIDEO_RATE.maxRate ? rate : rate + VIDEO_RATE.rateStep;
+        break;
+      case CHANGE_RATE_HOTKEYS.decrease:
+        video.playbackRate = rate <= VIDEO_RATE.minRate ? rate : rate - VIDEO_RATE.rateStep;
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handlePause = () => {
+    dispatch(updateCurrentTime({ ...lesson, currentTime: videoRef.current!.currentTime }));
+  };
+
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && Hls.isSupported()) {
       const video = videoRef.current;
+      const hls = initHls(link, video);
 
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-
-        hls.loadSource(link);
-        hls.attachMedia(video);
-
-        hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          video.currentTime = currentTime;
-        });
-
-        hls.on(Hls.Events.ERROR, (_, data) => {
-          if (data.fatal) {
-            switch (data.type) {
-              case Hls.ErrorTypes.NETWORK_ERROR:
-                setIsError(true);
-                break;
-              case Hls.ErrorTypes.MEDIA_ERROR:
-                hls.recoverMediaError();
-                break;
-              default:
-                hls.destroy();
-                break;
-            }
-          }
-        });
-      }
-      const handlePause = () => {
-        dispatch(updateCurrentTime({ ...lesson, currentTime: video.currentTime }));
-      };
-
-      const handleChangeSpeed = (event: KeyboardEvent) => {
-        if (!event.altKey) {
-          return;
-        }
-
-        const rate = video.playbackRate;
-
-        switch (event.key) {
-          case 'p':
-            video.playbackRate = rate >= 2 ? rate : rate + 0.25;
-            break;
-          case 'm':
-            video.playbackRate = rate <= 0.25 ? rate : rate - 0.25;
-            break;
-          default:
-            break;
-        }
-      };
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        video.currentTime = currentTime;
+      });
+      hls.on(Hls.Events.ERROR, hlsErrorHandler(hls, setIsError));
 
       video.addEventListener('pause', handlePause);
       window.addEventListener('keydown', handleChangeSpeed);
@@ -76,6 +59,7 @@ export const VideoBlock: FC<Props> = ({ lesson }) => {
       return () => {
         video.removeEventListener('pause', handlePause);
         window.removeEventListener('keydown', handleChangeSpeed);
+        hls.destroy();
       };
     }
   }, [link]);
@@ -83,7 +67,7 @@ export const VideoBlock: FC<Props> = ({ lesson }) => {
   return (
     <Box>
       {isError ? (
-        <img src={errorPlaceholder} alt="error" />
+        <img src={ERROR_PLACEHOLDER} alt="error" />
       ) : (
         <>
           <Typography gutterBottom variant="h5" component="p">

@@ -29,7 +29,7 @@ export const BurgerMenu: FC<Props> = memo(({ open, onDrawerToggle }) => {
         open={open}
         onClose={onDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: 'block', sm: 'none' },

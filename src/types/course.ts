@@ -1,4 +1,4 @@
-import { Maybe } from './helper-types';
+import { Id, Maybe } from './helper-types';
 
 export interface ICourseVideoPreview {
   link: string;
@@ -15,7 +15,7 @@ interface IMetaData {
 }
 
 export interface ILesson {
-  id: string;
+  id: Id;
   duration: number;
   link: string;
   meta: Maybe<IMetaData>;
@@ -28,7 +28,7 @@ export interface ILesson {
 }
 
 export interface ICourse {
-  id: string;
+  id: Id;
   title: string;
   tags: string[];
   launchDate: string | 'launched';

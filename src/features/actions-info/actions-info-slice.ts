@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IError, Maybe } from '../../types/helper-types';
 
 interface ActionsInfo {
@@ -17,16 +17,16 @@ const actionsInfoSlice = createSlice({
   name: 'info',
   initialState,
   reducers: {
-    registerAction: (state, action) => {
+    registerAction: (state, action: PayloadAction<string>) => {
       state.actions.push(action.payload);
     },
-    finishAction: (state, action) => {
+    finishAction: (state, action: PayloadAction<string>) => {
       state.actions = state.actions.filter((act) => act !== action.payload);
     },
-    setSuccessMessage: (state, action) => {
+    setSuccessMessage: (state, action: PayloadAction<string>) => {
       state.successMessage = action.payload;
     },
-    setError: (state, action) => {
+    setError: (state, action: PayloadAction<IError>) => {
       state.error = action.payload;
     },
     setDefaultStatus: (state) => {

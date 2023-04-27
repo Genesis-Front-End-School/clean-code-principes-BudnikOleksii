@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery, StrictEffect } from 'redux-saga/effects';
 import { getCourse, getCourses } from '../../api/courses-service';
 import {
   courseLoadingStart,
@@ -6,31 +6,31 @@ import {
   coursesSuccess,
   courseSuccess,
 } from '../../features/courses/courses-slice';
-import {
-  finishAction,
-  setError,
-} from '../../features/actions-info/actions-info-slice';
+import { finishAction, setError } from '../../features/actions-info/actions-info-slice';
 import { ICourseResponse, ICoursesResponse } from '../../types/course';
+import { IError } from '../../types/helper-types';
 
-function* coursesWorker() {
+function* coursesWorker(): Generator<StrictEffect, void, ICoursesResponse> {
   try {
-    const { courses } = (yield call(getCourses)) as ICoursesResponse;
+    const { courses } = yield call(getCourses);
 
     yield put(coursesSuccess(courses));
   } catch (error) {
-    yield put(setError(error));
+    yield put(setError(error as IError));
   } finally {
     yield put(finishAction(coursesLoadingStart.type));
   }
 }
 
-function* courseWorker({ payload }: ReturnType<typeof courseLoadingStart>) {
+function* courseWorker(
+  action: ReturnType<typeof courseLoadingStart>
+): Generator<StrictEffect, void, ICourseResponse> {
   try {
-    const course = (yield call(getCourse, payload.courseId)) as ICourseResponse;
+    const course = yield call(getCourse, action.payload.courseId);
 
     yield put(courseSuccess(course));
   } catch (error) {
-    yield put(setError(error));
+    yield put(setError(error as IError));
   } finally {
     yield put(finishAction(courseLoadingStart.type));
   }

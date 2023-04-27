@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Maybe } from '../../types/helper-types';
 import { ICourse, ICourseResponse, ILesson } from '../../types/course';
 
@@ -17,24 +17,23 @@ const coursesSlice = createSlice({
   initialState,
   reducers: {
     coursesLoadingStart: (state) => {},
-    coursesSuccess: (state, action) => {
+    coursesSuccess: (state, action: PayloadAction<ICourse[]>) => {
       state.courses = action.payload;
     },
-    courseLoadingStart: (state, action) => {},
-    courseSuccess: (state, action) => {
+    courseLoadingStart: (state, action: PayloadAction<{ courseId: string }>) => {},
+    courseSuccess: (state, action: PayloadAction<ICourseResponse>) => {
       state.selectedCourse = action.payload;
-      state.selectedCourse?.lessons.sort((a, b) => a.order - b.order);
+      state.selectedCourse.lessons.sort((a, b) => a.order - b.order);
     },
-    updateCurrentTime: (state, action) => {
-      const updatedLessons =
-        state.selectedCourse?.lessons.map((lesson) =>
-          lesson.id !== action.payload.id ? lesson : action.payload
-        ) || [];
+    updateCurrentTime: (state, action: PayloadAction<ILesson>) => {
+      const updatedLessons = state.selectedCourse!.lessons.map((lesson) =>
+        lesson.id !== action.payload.id ? lesson : action.payload
+      );
 
       state.selectedCourse = {
-        ...state.selectedCourse,
-        lessons: updatedLessons as ILesson[],
-      } as ICourseResponse;
+        ...state.selectedCourse!,
+        lessons: updatedLessons,
+      };
     },
   },
 });

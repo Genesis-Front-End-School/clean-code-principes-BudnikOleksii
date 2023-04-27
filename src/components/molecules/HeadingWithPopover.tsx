@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { Popover } from '@mui/material';
 import { VideoPreview } from '../organisms/VideoPreview';
 import { ICourseVideoPreview } from '../../types/course';
+import { Maybe } from '../../types/helper-types';
 
 type Props = {
   title: string;
@@ -10,10 +11,10 @@ type Props = {
 };
 
 export const HeadingWithPopover: FC<Props> = ({ title, courseVideoPreview }) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<Maybe<HTMLDivElement>>(null);
 
   const handleOpenPreview = (event: React.MouseEvent<HTMLDivElement>) => {
-    setAnchorEl(event.currentTarget as HTMLDivElement);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClosePreview = () => {

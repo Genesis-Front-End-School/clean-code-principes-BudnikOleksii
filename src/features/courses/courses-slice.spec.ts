@@ -5,6 +5,7 @@ import {
   mockCourseWithLessons,
   mockLesson,
   mockLesson2,
+  mockLesson3,
 } from '../../mock-data';
 
 describe('courses reducer', function () {
@@ -31,6 +32,6 @@ describe('courses reducer', function () {
       currentTime: 50,
     };
     const actual = coursesReducer(mockCoursesState, updateCurrentTime(updatedLesson));
-    expect(actual.selectedCourse!.lessons).toEqual([updatedLesson, mockLesson2]);
+    expect(actual.selectedCourse!.lessons).toEqual([updatedLesson, mockLesson2, mockLesson3]);
   });
 });

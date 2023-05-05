@@ -1,6 +1,8 @@
 import Hls, { Events } from 'hls.js';
 
 class HlsMock {
+  static instances = [];
+
   constructor() {
     this.loadSource = jest.fn();
     this.attachMedia = jest.fn();
@@ -10,6 +12,7 @@ class HlsMock {
     });
     this.recoverMediaError = jest.fn();
     this.destroy = jest.fn();
+    HlsMock.instances.push(this);
   }
 
   trigger(event, data) {

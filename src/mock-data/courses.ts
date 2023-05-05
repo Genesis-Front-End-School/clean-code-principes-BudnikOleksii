@@ -38,12 +38,21 @@ export const mockLesson: ILesson = {
   title: 'Why we lack motivation',
   type: 'video',
 };
-export const mockLesson2 = {
+export const mockLesson2: ILesson = {
   ...mockLesson,
   id: '125be3c6-848b-4c19-9e7d-54ash8fef183',
+  type: 'article',
+  status: 'locked',
 };
 
-export const mockLessons = [mockLesson, mockLesson2];
+export const mockLesson3: ILesson = {
+  ...mockLesson,
+  id: '125be3c6-848b-4c19-9e7d-54ash812f183',
+  type: 'quiz_simulator',
+  status: 'unlocked',
+};
+
+export const mockLessons = [mockLesson, mockLesson2, mockLesson3];
 export const mockCourseWithLessons: ICourseResponse = {
   ...mockCourse,
   meta: { ...mockCourse.meta },

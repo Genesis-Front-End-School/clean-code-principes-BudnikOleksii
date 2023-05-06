@@ -17,6 +17,7 @@ describe('BurgerMenu', () => {
     renderBurgerMenu(false);
 
     const drawer = screen.queryByRole('presentation');
+
     expect(drawer).not.toBeInTheDocument();
   });
 
@@ -24,6 +25,7 @@ describe('BurgerMenu', () => {
     renderBurgerMenu(true);
 
     const drawer = screen.getByRole('presentation');
+
     expect(drawer).toBeInTheDocument();
   });
 
@@ -32,8 +34,8 @@ describe('BurgerMenu', () => {
 
     const mainPageButton = screen.getByRole('button', { name: 'Main page' });
     userEvent.click(mainPageButton);
-
     const heading = screen.getByRole('heading', { name: /Courses app/i });
+
     expect(heading).toBeInTheDocument();
   });
 });

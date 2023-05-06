@@ -46,7 +46,6 @@ describe('NavMenu', () => {
     renderNavMenu(onDrawerToggle);
 
     fireEvent.click(screen.getByText('Main page'));
-    // This assertion checks if the URL pathname changed to '/courses'
     expect(screen.getByTestId('location-display')).toHaveTextContent('/courses');
   });
 });

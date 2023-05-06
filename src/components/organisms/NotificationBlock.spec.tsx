@@ -54,10 +54,8 @@ describe('NotificationBlock', () => {
     const closeButton = screen.getByText(/Success notification/i);
     userEvent.click(closeButton);
 
-    // Wait for UI to update
     await waitForElementToBeRemoved(() => screen.getByText(/success notification/i));
 
-    // Check if success message is cleared in the store
     const { successMessage } = testStore.getState().actionsInfo;
     expect(successMessage).toBe(null);
   });

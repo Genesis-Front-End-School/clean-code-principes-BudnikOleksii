@@ -1,11 +1,11 @@
-import { FC } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 
 type Props = {
   skill: string;
 };
 
-export const SkillItem: FC<Props> = ({ skill }) => {
+export const SkillItem: React.FC<Props> = ({ skill }) => {
   return (
     <Box
       key={skill}

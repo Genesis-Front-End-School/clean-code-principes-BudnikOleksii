@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Box from '@mui/material/Box';
-import { SkillItem } from '../atoms/SkillItem';
+import { SkillItem } from '../../lib/dist';
 
 type Props = {
   skills: string[];

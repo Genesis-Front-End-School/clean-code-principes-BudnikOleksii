@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Grid';
 
 type Props = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-export const GridContainer: FC<Props> = ({ children }) => {
+export const GridContainer: React.FC<Props> = ({ children }) => {
   return (
     <Grid container spacing={2} sx={{ mt: 3, p: 3 }}>
       {children}

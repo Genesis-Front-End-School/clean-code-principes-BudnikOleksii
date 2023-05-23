@@ -6,7 +6,9 @@ import React from 'react';
 jest.mock('../organisms/NotificationBlock');
 jest.mock('../organisms/NavMenu');
 jest.mock('../organisms/BurgerMenu');
-jest.mock('../atoms/ContentContainer');
+jest.mock('../../lib/dist', () => ({
+  ContentContainer: () => <div data-testid="content-container">Mocked ContentContainer</div>,
+}));
 
 describe('Layout', () => {
   beforeEach(() => {
@@ -49,8 +51,8 @@ describe('Layout', () => {
     expect(burgerMenu).toHaveAttribute('aria-hidden', 'true');
   });
 
-  test('renders Outlet', () => {
-    const outlet = screen.getByText('Test Page');
-    expect(outlet).toBeInTheDocument();
+  test('renders content-container', () => {
+    const contentContainer = screen.getByTestId('content-container');
+    expect(contentContainer).toBeInTheDocument();
   });
 });

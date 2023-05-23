@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ICourse } from '../../types/course';
 import { CourseCard } from './CourseCard';
-import { GridContainer } from '../atoms/GridContainer';
+import { GridContainer } from '../../lib/dist';
 
 interface Props {
   courses: ICourse[];

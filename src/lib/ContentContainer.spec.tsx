@@ -18,7 +18,7 @@ describe('ContentContainer', () => {
     expect(container).toHaveStyle({
       width: '100%',
       maxWidth: '1440px',
-      margin: '64px auto',
+      margin: '64px auto 0px',
     });
   });
 });

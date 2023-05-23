@@ -36,7 +36,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage"
+    "test:coverage": "react-scripts test --env=jsdom --watchAll=false --coverage",
+    "build:lib": "webpack --config src/lib/webpack.config.js"
   },
   "eslintConfig": {
     "extends": [
@@ -45,7 +46,9 @@
     ]
   },
   "jest": {
-    "transformIgnorePatterns": ["node_modules/(?!axios)"],
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/src/index.tsx?",
@@ -67,6 +70,7 @@
     ]
   },
   "devDependencies": {
-    "prettier": "2.8.4"
+    "prettier": "2.8.4",
+    "webpack-cli": "^5.1.1"
   }
 }

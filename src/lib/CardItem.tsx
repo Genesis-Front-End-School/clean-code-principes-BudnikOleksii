@@ -1,11 +1,11 @@
-import { FC, ReactNode } from 'react';
+import React from 'react';
 import Card from '@mui/material/Card';
 
 type Props = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
-export const CardItem: FC<Props> = ({ children }) => {
+export const CardItem: React.FC<Props> = ({ children }) => {
   return (
     <Card
       sx={{

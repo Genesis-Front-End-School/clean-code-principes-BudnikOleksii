@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { ILesson } from '../../types/course';
-import { CardItem } from '../atoms/CardItem';
+import { CardItem } from '../../lib/dist';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { NotificationBlock } from '../organisms/NotificationBlock';
 import { NavMenu } from '../organisms/NavMenu';
 import { BurgerMenu } from '../organisms/BurgerMenu';
-import { ContentContainer } from '../atoms/ContentContainer';
+import { ContentContainer } from '../../lib/dist';
 import { useTheme } from '@mui/material/styles';
 
 export const Layout = () => {

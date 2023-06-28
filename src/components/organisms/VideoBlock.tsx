@@ -73,7 +73,12 @@ export const VideoBlock: FC<Props> = ({ lesson }) => {
           <Typography gutterBottom variant="h5" component="p">
             You can increase video speed by pressing alt + p and decrease with alt + m
           </Typography>
-          <video ref={videoRef} controls={true} style={{ width: '100%' }} />
+          <video
+            ref={videoRef}
+            controls={true}
+            style={{ width: '100%' }}
+            data-testid="video-element"
+          />
         </>
       )}
     </Box>

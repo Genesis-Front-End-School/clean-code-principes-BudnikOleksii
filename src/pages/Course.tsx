@@ -11,16 +11,14 @@ import { CourseContent } from '../components/organisms/CourseContent';
 import NotFound from './NotFound';
 
 const Course = () => {
-  const { courseId = '' } = useParams();
+  const { courseId } = useParams();
   const dispatch = useAppDispatch();
   const { selectedCourse } = useAppSelector(selectCourses);
   const isLoading = useAppSelector(selectIsActionInProcess(courseLoadingStart.type));
 
   useEffect(() => {
-    if (courseId) {
-      dispatch(registerAction(courseLoadingStart.type));
-      dispatch(courseLoadingStart({ courseId }));
-    }
+    dispatch(registerAction(courseLoadingStart.type));
+    dispatch(courseLoadingStart({ courseId: courseId! }));
   }, [courseId]);
 
   return (

@@ -30,7 +30,14 @@ export const VideoPreview: FC<Props> = ({ link }) => {
       {isError ? (
         <img src={ERROR_PLACEHOLDER} alt="error" style={{ width: '300px' }} />
       ) : (
-        <video ref={videoRef} muted loop autoPlay style={{ width: '300px' }} />
+        <video
+          ref={videoRef}
+          muted
+          loop
+          autoPlay
+          style={{ width: '300px' }}
+          data-testid="video-element"
+        />
       )}
     </Box>
   );

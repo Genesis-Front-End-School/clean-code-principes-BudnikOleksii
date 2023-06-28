@@ -10,7 +10,7 @@ import { finishAction, setError } from '../../features/actions-info/actions-info
 import { ICourseResponse, ICoursesResponse } from '../../types/course';
 import { IError } from '../../types/helper-types';
 
-function* coursesWorker(): Generator<StrictEffect, void, ICoursesResponse> {
+export function* coursesWorker(): Generator<StrictEffect, void, ICoursesResponse> {
   try {
     const { courses } = yield call(getCourses);
 
@@ -22,7 +22,7 @@ function* coursesWorker(): Generator<StrictEffect, void, ICoursesResponse> {
   }
 }
 
-function* courseWorker(
+export function* courseWorker(
   action: ReturnType<typeof courseLoadingStart>
 ): Generator<StrictEffect, void, ICourseResponse> {
   try {

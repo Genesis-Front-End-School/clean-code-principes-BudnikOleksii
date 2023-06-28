@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import { PATHS } from '../../constants';
+import { ThemeSwitch } from '../atoms/ThemeSwitch';
 
 interface Props {
   onDrawerToggle: () => void;
@@ -36,6 +37,8 @@ export const NavMenu: FC<Props> = memo(({ onDrawerToggle }) => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Courses app
         </Typography>
+
+        <ThemeSwitch />
 
         <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <Button onClick={handleNavigate} sx={{ color: '#fff' }}>

@@ -63,7 +63,7 @@ export const LessonInfo: FC<Props> = ({ lesson, activeLessonId, onCurrentChange 
         sx={{ cursor: 'pointer' }}
       />
 
-      <Button size="small" onClick={handleOpen}>
+      <Button color="info" size="small" onClick={handleOpen}>
         {isLocked ? <LockIcon /> : 'Info'}
       </Button>
 

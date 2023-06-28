@@ -97,7 +97,7 @@ export const CourseCard: FC<Props> = ({ course, isWithLink }) => {
 
           {isWithLink && (
             <CardActions sx={{ marginTop: 'auto' }}>
-              <Button onClick={handleOpenCourse} size="large">
+              <Button color="info" onClick={handleOpenCourse} size="large">
                 Details
               </Button>
             </CardActions>

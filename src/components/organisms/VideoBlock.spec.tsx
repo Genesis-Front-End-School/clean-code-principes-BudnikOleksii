@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { VideoBlock } from './VideoBlock';
 import { mockLesson } from '../../mock-data';
 import { renderWithProviders } from '../../utils/test-utils';
